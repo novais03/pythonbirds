@@ -5,7 +5,7 @@ dosi atributos compostos por outras duas classes:
 1) Motor
 2) Direção
 
-O mottor terá a responsabilidade de controlar a velocidade.
+O motor terá a responsabilidade de controlar a velocidade.
 Ele oferecerá os seguintes atributos:
 1) Atributo de dado velocidade;
 2) Método a ecelerar, que deverá acrescentar a velocidade de uma unidade
@@ -22,7 +22,7 @@ os eguintes atributis:
   s
     Exemplo:
     >>> #testando motor
-    >>> motor = motor()
+    >>> motor = Motor()
     >>> motor.velocidade
     0
     >>> motor.acelerar()
@@ -32,13 +32,13 @@ os eguintes atributis:
     >>> motor.velocidade
     2
     >>> motor.acelerar()
-    >>> motor.acelerar()
+    >>> motor.velocidade
     3
     >>> motor.frear()
-    >>> motor.acelerar()
+    >>> motor.velocidade
     1
     >>> motor.frear()
-    >>> motor.acelerar()
+    >>> motor.velocidade
     0
     >>> #testando a Direção
     >>> direcao = direcao()
@@ -81,44 +81,19 @@ os eguintes atributis:
     >>> carro.calcular_velocidade()
     0
     >>> carro.calcular direcao()
-    >>> 'Norte'
+    'Norte'
     >>> carro.girar_a_direita()
     >>> carro.calcular_a_direcao()
-    >>>'Leste'
+    'Leste'
     >>> carro.girar_a_esuqerda()
     >>> carro.calcular_a_direcao()
-    >>> 'Norte'
+    'Norte'
     >>> carro.girar_a_esquerda()
     >>> carro.calcular_a_direcao()
     'Oeste'
 """
 
-NORTE='Norte'
-SUL='Sul'
-LESTE='Leste'
-OESTE='Oeste'
-
-class Direcao:
-    rotacao_a_direita_dct={
-        NORTE: LESTE, LESTE: SUL, SUL: OESTE, OESTE: NORTE
-    }
-
-    rotacao_a_esquerda_dct={
-        NORTE: OESTE, LESTE: NORTE, SUL: LESTE, OESTE: SUL
-    }
-
-    def __init__(self):
-        self.valor = NORTE
-
-    def girar_a_direita(self):
-        self.valor = self.rotacao_a_direita_dct[self.valor]
-
-    def girar_a_esquerda(self):
-        self.valor = self.rotacao_esquerda_dct[self.valor]
-
-
-
-class Moto:
+class Motor:
     def __init__(self):
         self.velocidade = 0
 
@@ -126,8 +101,5 @@ class Moto:
         self.velocidade += 1
 
     def frear(self):
-        self.velocidade -= 1
+        self.velocidade-= 2
         self.velocidade = max(0, self.velocidade)
-
-
-
