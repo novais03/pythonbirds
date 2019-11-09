@@ -20,8 +20,8 @@ os eguintes atributis:
   N
 0   L
   s
-    Exemplo:
-    >>> #testando motor
+Exemplo:
+    >>> # Testando motor
     >>> motor = Motor()
     >>> motor.velocidade
     0
@@ -40,14 +40,14 @@ os eguintes atributis:
     >>> motor.frear()
     >>> motor.velocidade
     0
-    >>> #testando a Direção
-    >>> direcao = direcao()
+    >>> # Testando Direcao
+    >>> direcao = Direcao()
     >>> direcao.valor
     'Norte'
     >>> direcao.girar_a_direita()
     >>> direcao.valor
     'Leste'
-    >>> direcao.girar_a_direita(
+    >>> direcao.girar_a_direita()
     >>> direcao.valor
     'Sul'
     >>> direcao.girar_a_direita()
@@ -68,7 +68,7 @@ os eguintes atributis:
     >>> direcao.girar_a_esquerda()
     >>> direcao.valor
     'Norte'
-    >>> carro = carro(direcao, motor)
+    >>> carro = Carro(direcao, motor)
     >>> carro.calcular_velocidade()
     0
     >>> carro.acelerar()
@@ -80,18 +80,42 @@ os eguintes atributis:
     >>> carro.frear()
     >>> carro.calcular_velocidade()
     0
-    >>> carro.calcular direcao()
+    >>> carro.calcular_direcao()
     'Norte'
     >>> carro.girar_a_direita()
-    >>> carro.calcular_a_direcao()
+    >>> carro.calcular_direcao()
     'Leste'
-    >>> carro.girar_a_esuqerda()
-    >>> carro.calcular_a_direcao()
+    >>> carro.girar_a_esquerda()
+    >>> carro.calcular_direcao()
     'Norte'
     >>> carro.girar_a_esquerda()
-    >>> carro.calcular_a_direcao()
+    >>> carro.calcular_direcao()
     'Oeste'
 """
+
+NORTE = 'Norte'
+SUL = 'Sul'
+LESTE = 'Leste'
+OESTE = 'Oeste'
+
+class Direcao:
+    rotacao_a_direita_dct={
+        NORTE: LESTE, LESTE: SUL, SUL: OESTE, OESTE: NORTE
+    }
+
+    rotacao_a_esquerda_dct = {
+        NORTE: OESTE, LESTE: NORTE, SUL: LESTE, OESTE: SUL
+    }
+
+    def __init__(self):
+        self.valor = NORTE
+
+    def girar_a_direita(self):
+        self.valor = self.rotacao_a_direita_dct[self.valor]
+
+    def girar_a_esquerda(self):
+        self.valor = self.rotacao_a_esquerda_dct[self.valor]
+
 
 class Motor:
     def __init__(self):
@@ -101,5 +125,5 @@ class Motor:
         self.velocidade += 1
 
     def frear(self):
-        self.velocidade-= 2
+        self.velocidade -= 2
         self.velocidade = max(0, self.velocidade)
